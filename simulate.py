@@ -30,11 +30,12 @@ def simulate(planner_cfg, agent_cfg, filter_cfg, extra_cfg, density_fn, render_f
     end_state = planner_cfg['end_state']
     
     # Creates a workspace to hold all the trajectory data
-    basefolder = "paths" / pathlib.Path(planner_cfg['exp_name'])
+    basefolder = "." / pathlib.Path(planner_cfg['exp_name'])
     if basefolder.exists():
         print(basefolder, "already exists!")
-        if input("Clear it before continuing? [y/N]:").lower() == "y":
-            shutil.rmtree(basefolder)
+        shutil.rmtree(basefolder)
+        # if input("Clear it before continuing? [y/N]:").lower() == "y":
+        #     shutil.rmtree(basefolder)
     basefolder.mkdir()
     (basefolder / "train_poses").mkdir()
     (basefolder / "train_graph").mkdir()
@@ -129,6 +130,9 @@ def simulate(planner_cfg, agent_cfg, filter_cfg, extra_cfg, density_fn, render_f
 ####################### END OF MAIN LOOP ##########################################
 
 if __name__ == "__main__":
+
+    os.system("rm -r stone_nerf")
+    os.system("cp -r stone_nerf-origin stone_nerf")
 
     ### ------ TORCH-NGP SPECIFIC ----- ###
     parser = argparse.ArgumentParser()

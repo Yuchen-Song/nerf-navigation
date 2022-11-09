@@ -248,20 +248,20 @@ class Estimator():
                     print('error', calcSE3Err(pose.detach().cpu().numpy(), obs_img_pose))
                     print('-----------------------------------')
                     
-                    if (k+1) % 100 == 0:
-                        rgb = self.render_from_pose(pose)
-                        rgb = torch.squeeze(rgb).cpu().detach().numpy()
-                        f, axarr = plt.subplots(2)
-                        
-                        #Add keypoint visualization
-                        render = rgb.reshape((obs_img_noised.shape[0], obs_img_noised.shape[1], -1))
-                        gt_img = obs_img_noised.cpu().numpy()
-                        render[batch[:, 0], batch[:, 1]] = np.array([0., 1., 0.])
-                        gt_img[batch[:, 0], batch[:, 1]] = np.array([0., 1., 0.])
-
-                        axarr[0].imshow(render)
-                        axarr[1].imshow(gt_img)
-                        plt.show()
+                    # if (k+1) % 100 == 0:
+                    #     rgb = self.render_from_pose(pose)
+                    #     rgb = torch.squeeze(rgb).cpu().detach().numpy()
+                    #     f, axarr = plt.subplots(2)
+                    #
+                    #     #Add keypoint visualization
+                    #     render = rgb.reshape((obs_img_noised.shape[0], obs_img_noised.shape[1], -1))
+                    #     gt_img = obs_img_noised.cpu().numpy()
+                    #     render[batch[:, 0], batch[:, 1]] = np.array([0., 1., 0.])
+                    #     gt_img[batch[:, 0], batch[:, 1]] = np.array([0., 1., 0.])
+                    #
+                    #     axarr[0].imshow(render)
+                    #     axarr[1].imshow(gt_img)
+                    #     plt.show()
 
         print("Done with main relative_pose_estimation loop")
         self.target = obs_img_noised
